@@ -11,6 +11,8 @@ struct Pokemon : Codable, Identifiable, Hashable {
     var id : Int
     var name : String
     var types : [PokemonType]
+    var abilities : [PokemonAbility]
+    var moves : [PokemonMove]
     var sprites : Sprites
     
     struct Sprites : Codable, Hashable {

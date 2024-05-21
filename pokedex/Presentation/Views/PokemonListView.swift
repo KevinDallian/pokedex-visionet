@@ -12,7 +12,7 @@ struct PokemonListView: View {
     var body: some View {
         NavigationStack{
             List(viewModel.pokemonList, id: \.id) { pokemon in
-                NavigationLink(pokemon.name, value: pokemon)
+                NavigationLink(capitalFirstLetter(text: pokemon.name), value: pokemon)
             }
             .navigationDestination(for: Pokemon.self, destination: { pokemon in
                 PokemonDetailView(pokemon: pokemon)

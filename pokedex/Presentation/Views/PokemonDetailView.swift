@@ -13,8 +13,29 @@ struct PokemonDetailView: View {
     var body: some View {
         VStack{
             AsyncImage(url: URL(string: pokemon.sprites.front_default))
-            Text(pokemon.name)
+            Text(capitalFirstLetter(text: pokemon.name))
+                .font(.title)
+                .bold()
+            List{
+                Section("Types") {
+                    ForEach(pokemon.types, id: \.slot) { pokemonType in
+                        Text(capitalFirstLetter(text: pokemonType.type.name))
+                    }
+                }
+                Section("Abilities") {
+                    
+                    ForEach(pokemon.abilities, id: \.slot) { pokemonAbility in
+                        Text(capitalFirstLetter(text: pokemonAbility.ability.name))
+                    }
+                }
+                Section("Moves") {
+                    ForEach(pokemon.moves, id: \.hashValue) { pokemonMove in
+                        Text(capitalFirstLetter(text: pokemonMove.move.name))
+                    }
+                }
+            }
         }
+       
     }
 }
 
