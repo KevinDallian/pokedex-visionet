@@ -9,13 +9,24 @@ import SwiftUI
 
 struct MyPokemonDetailView: View {
     @StateObject var vm : MyPokemonDetailViewModel
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack{
             AsyncImage(url: URL(string: vm.pokemon.pokemon.sprites.front_default))
-            Text(capitalFirstLetter(text: vm.pokemon.nickname))
-                .font(.title)
-                .bold()
+            HStack{
+                Text(capitalFirstLetter(text: vm.pokemon.nickname))
+                    .font(.title)
+                    .bold()
+                Button {
+                    vm.showAlert.toggle()
+                } label: {
+                    Image(systemName: "pencil.circle")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                }
+            }
+            
             List{
                 Section("Types") {
                     ForEach(vm.pokemon.pokemon.types, id: \.slot) { pokemonType in
@@ -37,9 +48,12 @@ struct MyPokemonDetailView: View {
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button {
-                    vm.showAlert.toggle()
+                    Task{
+                        await vm.releasePokemon()
+                    }
                 } label: {
-                    Text("Rename")
+                    Text("Release")
+                        .foregroundStyle(.red)
                 }
 
             }
@@ -47,11 +61,22 @@ struct MyPokemonDetailView: View {
         .alert("Rename", isPresented: $vm.showAlert) {
             TextField("\(vm.pokemon.nickname)", text: $vm.newNickname)
             Button("Save") {
-                vm.renamePokemon()
+                Task{
+                    await vm.renamePokemon()
+                }
             }
         } message: {
             Text("Enter a new name for \(vm.pokemon.nickname)")
         }
-
+        .alert(vm.isReleased ? "Released \(vm.pokemon.nickname)" : "Release Failed", isPresented: $vm.showRelease) {
+            Button("Dismiss") {
+                if vm.isReleased {
+                    dismiss()
+                    vm.deletePokemon()
+                }
+            }
+        } message: {
+            Text(vm.isReleased ? "\(vm.pokemon.nickname) has been released" : "Failed to release \(vm.pokemon.nickname)")
+        }
     }
 }

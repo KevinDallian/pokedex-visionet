@@ -10,3 +10,12 @@ import Foundation
 struct CatchResponse : Codable {
     let success : Bool
 }
+
+struct ReleaseResponse : Codable {
+    let number : Int
+}
+
+struct RenameResponse : Codable {
+    let name : String
+    let renameCount : Int
+}

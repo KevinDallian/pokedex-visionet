@@ -8,7 +8,15 @@
 import Foundation
 
 struct SavedPokemon : Hashable, Codable {
+    var id : String
     var nickname : String
     var renameCount : Int
     let pokemon : Pokemon
+    
+    init(id: String? = nil, nickname: String, renameCount: Int, pokemon: Pokemon) {
+        self.id = id ?? "\(nickname)-0"
+        self.nickname = nickname
+        self.renameCount = renameCount
+        self.pokemon = pokemon
+    }
 }
