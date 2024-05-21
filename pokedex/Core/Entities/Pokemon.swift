@@ -20,5 +20,15 @@ struct Pokemon : Codable, Identifiable, Hashable {
         let back_default : String
         let front_shiny : String
         let back_shiny : String
+        
+        var firstAvailableImageURL: URL? {
+            let urls = [front_default, back_default, front_shiny, back_shiny]
+            for urlString in urls {
+                if let url = URL(string: urlString), !urlString.isEmpty {
+                    return url
+                }
+            }
+            return nil
+        }
     }
 }
