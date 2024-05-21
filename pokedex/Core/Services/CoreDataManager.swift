@@ -58,6 +58,7 @@ class CoreDataManager : ObservableObject {
     
     func deletePokemon(index: Int, context: NSManagedObjectContext){
         let pokemon = pokemons[index]
+        print(pokemon)
         container.viewContext.delete(pokemon)
         save(context: context)
     }

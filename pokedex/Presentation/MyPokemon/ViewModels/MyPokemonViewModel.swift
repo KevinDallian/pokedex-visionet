@@ -13,7 +13,7 @@ class MyPokemonViewModel : ObservableObject {
     
     init(moc: NSManagedObjectContext) {
         self.moc = moc
-        fetchPokemonList()
+        self.fetchPokemonList()
     }
     
     func fetchPokemonList() {

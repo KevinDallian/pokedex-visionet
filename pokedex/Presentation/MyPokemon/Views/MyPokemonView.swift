@@ -13,7 +13,7 @@ struct MyPokemonView: View {
     var body: some View {
         List(vm.pokemonList, id: \.nickname) { savedPokemon in
             NavigationLink {
-                MyPokemonDetailView(vm: MyPokemonDetailViewModel(pokemon: savedPokemon, moc: moc))
+                MyPokemonDetailView(vm: MyPokemonDetailViewModel(pokemon: savedPokemon, moc: moc, pvm: vm))
             } label: {
                 ListComponent(title: savedPokemon.nickname, imageURL: savedPokemon.pokemon.sprites.firstAvailableImageURL)
             }

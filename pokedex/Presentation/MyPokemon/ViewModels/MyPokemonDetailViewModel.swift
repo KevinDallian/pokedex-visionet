@@ -11,16 +11,18 @@ import SwiftUI
 
 class MyPokemonDetailViewModel : ObservableObject {
     var moc : NSManagedObjectContext
+    @ObservedObject var pvm : MyPokemonViewModel
     @Published var pokemon : SavedPokemon
     @Published var showAlert : Bool = false
     @Published var newNickname : String = ""
     @Published var isReleased : Bool = false
     @Published var showRelease : Bool = false
     
-    init(pokemon: SavedPokemon, moc: NSManagedObjectContext) {
+    init(pokemon: SavedPokemon, moc: NSManagedObjectContext, pvm: MyPokemonViewModel) {
         self.pokemon = pokemon
         self.newNickname = pokemon.nickname
         self.moc = moc
+        self.pvm = pvm
     }
     
     func renamePokemon() async {
@@ -33,6 +35,7 @@ class MyPokemonDetailViewModel : ObservableObject {
             CoreDataManager.shared.editPokemon(index: index!, pokemon: newPokemon, context: moc)
             DispatchQueue.main.async{
                 self.pokemon = newPokemon
+                self.pvm.pokemonList[index!] = newPokemon
             }
         } catch let error {
             print("Error renaming Pokemon : \(error)")
@@ -58,5 +61,6 @@ class MyPokemonDetailViewModel : ObservableObject {
             return
         }
         CoreDataManager.shared.pokemons.remove(at: index)
+        self.pvm.pokemonList.remove(at: index)
     }
 }
