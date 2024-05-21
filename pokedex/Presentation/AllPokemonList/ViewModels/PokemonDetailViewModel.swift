@@ -5,16 +5,20 @@
 //  Created by Kevin Dallian on 21/05/24.
 //
 
+import CoreData
 import Foundation
+import SwiftUI
 
 class PokemonDetailViewModel : ObservableObject {
+    var moc : NSManagedObjectContext
     @Published var pokemon : Pokemon
     @Published var isCaught : Bool = false
     @Published var showAlert : Bool = false
     @Published var nickname : String = ""
     
-    init(pokemon: Pokemon) {
+    init(pokemon: Pokemon, moc: NSManagedObjectContext) {
         self.pokemon = pokemon
+        self.moc = moc
     }
     
     func catchPokemon() async {
@@ -31,6 +35,6 @@ class PokemonDetailViewModel : ObservableObject {
     
     func savePokemon() async {
         let pokemon = SavedPokemon(nickname: nickname, renameCount: 0, pokemon: pokemon)
-        CoreDataManager.shared.pokemons.append(pokemon)
+        CoreDataManager.shared.addPokemon(pokemon: pokemon, context: moc)
     }
 }

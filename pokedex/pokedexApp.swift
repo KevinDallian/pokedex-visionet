@@ -12,6 +12,7 @@ struct pokedexApp: App {
     var body: some Scene {
         WindowGroup {
             PokemonListView()
+                .environment(\.managedObjectContext, CoreDataManager.shared.container.viewContext)
         }
     }
 }

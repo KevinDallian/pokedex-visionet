@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PokemonListView: View {
     @StateObject var vm = PokemonListViewModel()
+    @Environment(\.managedObjectContext) var moc
     var body: some View {
         NavigationStack{
             List(vm.pokemonList, id: \.id) { pokemon in
@@ -17,7 +18,7 @@ struct PokemonListView: View {
                 }
             }
             .navigationDestination(for: Pokemon.self, destination: { pokemon in
-                PokemonDetailView(vm: PokemonDetailViewModel(pokemon: pokemon))
+                PokemonDetailView(vm: PokemonDetailViewModel(pokemon: pokemon, moc: moc))
             })
             .onAppear(perform: {
                 vm.fetchPokemonList()
@@ -26,7 +27,7 @@ struct PokemonListView: View {
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     NavigationLink("My Pokemon") {
-                        MyPokemonView()
+                        MyPokemonView(vm: MyPokemonViewModel(moc: moc))
                     }
                 }
             }
