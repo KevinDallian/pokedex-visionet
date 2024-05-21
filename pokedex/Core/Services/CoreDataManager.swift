@@ -25,6 +25,7 @@ class CoreDataManager : ObservableObject {
     func save(context : NSManagedObjectContext) {
         do {
             try context.save()
+            print("Save")
         } catch let error {
             print("Error saving context :\(error)")
         }
@@ -51,15 +52,17 @@ class CoreDataManager : ObservableObject {
     }
     
     func editPokemon(index: Int, pokemon: SavedPokemon, context : NSManagedObjectContext) {
-        var newPokemon = pokemons[index]
+        let newPokemon = pokemons[index]
         newPokemon.nickname = pokemon.nickname
+        newPokemon.nameId = pokemon.id
+        newPokemon.renameCount = Int32(pokemon.renameCount)
         save(context: context)
     }
     
     func deletePokemon(index: Int, context: NSManagedObjectContext){
         let pokemon = pokemons[index]
-        print(pokemon)
         container.viewContext.delete(pokemon)
+        self.pokemons.remove(at: index)
         save(context: context)
     }
     

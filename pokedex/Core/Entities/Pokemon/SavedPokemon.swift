@@ -13,8 +13,8 @@ struct SavedPokemon : Hashable, Codable {
     var renameCount : Int
     let pokemon : Pokemon
     
-    init(id: String? = nil, nickname: String, renameCount: Int, pokemon: Pokemon) {
-        self.id = id ?? "\(nickname)-0"
+    init(id: String, nickname: String, renameCount: Int, pokemon: Pokemon) {
+        self.id = id
         self.nickname = nickname
         self.renameCount = renameCount
         self.pokemon = pokemon

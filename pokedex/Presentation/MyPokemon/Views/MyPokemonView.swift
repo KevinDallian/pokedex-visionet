@@ -18,6 +18,9 @@ struct MyPokemonView: View {
                 ListComponent(title: savedPokemon.nickname, imageURL: savedPokemon.pokemon.sprites.firstAvailableImageURL)
             }
         }
+        .onAppear(perform: {
+            vm.fetchPokemonList()
+        })
         .navigationTitle("My Pokemon List")
     }
 }

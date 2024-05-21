@@ -34,7 +34,7 @@ class PokemonDetailViewModel : ObservableObject {
     }
     
     func savePokemon() async {
-        let pokemon = SavedPokemon(nickname: nickname, renameCount: 0, pokemon: pokemon)
+        let pokemon = SavedPokemon(id: "\(nickname)-0",nickname: nickname, renameCount: 0, pokemon: pokemon)
         CoreDataManager.shared.addPokemon(pokemon: pokemon, context: moc)
     }
 }

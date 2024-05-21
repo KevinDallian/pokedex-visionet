@@ -28,6 +28,9 @@ struct MyPokemonDetailView: View {
             }
             
             List{
+                Section("Name ID") {
+                    Text(vm.pokemon.id)
+                }
                 Section("Types") {
                     ForEach(vm.pokemon.pokemon.types, id: \.slot) { pokemonType in
                         Text(capitalFirstLetter(text: pokemonType.type.name))
@@ -60,6 +63,8 @@ struct MyPokemonDetailView: View {
         }
         .alert("Rename", isPresented: $vm.showAlert) {
             TextField("\(vm.pokemon.nickname)", text: $vm.newNickname)
+                .autocorrectionDisabled()
+                .textInputAutocapitalization(.never)
             Button("Save") {
                 Task{
                     await vm.renamePokemon()

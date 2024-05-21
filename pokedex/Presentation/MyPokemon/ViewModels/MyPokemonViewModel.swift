@@ -13,7 +13,6 @@ class MyPokemonViewModel : ObservableObject {
     
     init(moc: NSManagedObjectContext) {
         self.moc = moc
-        self.fetchPokemonList()
     }
     
     func fetchPokemonList() {
@@ -37,8 +36,13 @@ class MyPokemonViewModel : ObservableObject {
             }
             
             let pokemon = try JSONDecoder().decode(Pokemon.self, from: data)
-            let savedPokemon = SavedPokemon(nickname: pokemonEntity.nickname!, renameCount: Int(pokemonEntity.renameCount), pokemon: pokemon)
+            let savedPokemon = SavedPokemon(id: pokemonEntity.nameId! ,nickname: pokemonEntity.nickname!, renameCount: Int(pokemonEntity.renameCount), pokemon: pokemon)
             DispatchQueue.main.async {
+                if self.pokemonList.contains(where: { pokemon in
+                    pokemon.id == savedPokemon.id
+                }){
+                    return
+                }
                 self.pokemonList.append(savedPokemon)
             }
         } catch {
