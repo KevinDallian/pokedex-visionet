@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct CatchResponse : Codable {
+    let success : Bool
+}

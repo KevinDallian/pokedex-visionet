@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct PokemonListView: View {
-    @StateObject var viewModel = PokemonListViewModel()
+    @StateObject var vm = PokemonListViewModel()
     var body: some View {
         NavigationStack{
-            List(viewModel.pokemonList, id: \.id) { pokemon in
+            List(vm.pokemonList, id: \.id) { pokemon in
                 NavigationLink(value: pokemon) {
                     ListComponent(pokemon: pokemon)
                 }
             }
             .navigationDestination(for: Pokemon.self, destination: { pokemon in
-                PokemonDetailView(pokemon: pokemon)
+                PokemonDetailView(vm: PokemonDetailViewModel(pokemon: pokemon))
             })
             .onAppear(perform: {
-                viewModel.fetchPokemonList()
+                vm.fetchPokemonList()
             })
             .navigationTitle("Pokemon List")
         }
