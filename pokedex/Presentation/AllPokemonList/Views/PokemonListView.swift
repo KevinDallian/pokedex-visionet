@@ -13,7 +13,7 @@ struct PokemonListView: View {
         NavigationStack{
             List(vm.pokemonList, id: \.id) { pokemon in
                 NavigationLink(value: pokemon) {
-                    ListComponent(pokemon: pokemon)
+                    ListComponent(title: pokemon.name, imageURL: pokemon.sprites.firstAvailableImageURL)
                 }
             }
             .navigationDestination(for: Pokemon.self, destination: { pokemon in
@@ -23,6 +23,13 @@ struct PokemonListView: View {
                 vm.fetchPokemonList()
             })
             .navigationTitle("Pokemon List")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    NavigationLink("My Pokemon") {
+                        MyPokemonView()
+                    }
+                }
+            }
         }
     }
 }

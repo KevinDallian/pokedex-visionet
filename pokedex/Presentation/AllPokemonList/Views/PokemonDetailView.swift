@@ -46,11 +46,13 @@ struct PokemonDetailView: View {
         }
         .alert(vm.isCaught ? "Congratulations!" : "You Failed", isPresented: $vm.showAlert) {
             if vm.isCaught {
-                TextField("Enter a nickname", text: $vm.username)
+                TextField("Enter a nickname", text: $vm.nickname)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                 Button("Save") {
-                    
+                    Task{
+                        await vm.savePokemon()
+                    }
                 }
             } else {
                 Button("Dismiss") {

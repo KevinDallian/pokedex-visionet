@@ -8,18 +8,15 @@
 import SwiftUI
 
 struct ListComponent: View {
-    let pokemon : Pokemon
+    let title : String
+    let imageURL : URL?
     var body: some View {
         HStack{
-            AsyncImage(url: pokemon.sprites.firstAvailableImageURL) { image in
+            AsyncImage(url: imageURL) { image in
                 image.image?.resizable()
             }
             .frame(width: 80, height: 80)
-            Text(capitalFirstLetter(text: pokemon.name))
+            Text(capitalFirstLetter(text: title))
         }
     }
 }
-
-//#Preview {
-//    ListComponent()
-//}

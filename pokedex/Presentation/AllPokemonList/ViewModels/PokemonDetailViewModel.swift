@@ -11,7 +11,7 @@ class PokemonDetailViewModel : ObservableObject {
     @Published var pokemon : Pokemon
     @Published var isCaught : Bool = false
     @Published var showAlert : Bool = false
-    @Published var username : String = ""
+    @Published var nickname : String = ""
     
     init(pokemon: Pokemon) {
         self.pokemon = pokemon
@@ -27,5 +27,10 @@ class PokemonDetailViewModel : ObservableObject {
         } catch let error {
             print("Error Catching pokemon : \(error)")
         }
+    }
+    
+    func savePokemon() async {
+        let pokemon = SavedPokemon(nickname: nickname, renameCount: 0, pokemon: pokemon)
+        CoreDataManager.shared.pokemons.append(pokemon)
     }
 }
