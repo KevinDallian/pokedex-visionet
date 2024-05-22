@@ -49,6 +49,7 @@ class CoreDataManager : ObservableObject {
         savedPokemon.pokemonUrl = "https://pokeapi.co/api/v2/pokemon/\(pokemon.pokemon.name)"
         savedPokemon.imageUrl = "\(String(describing: pokemon.pokemon.sprites.firstAvailableImageURL))"
         save(context: context)
+        self.fetchPokemons(context: context)
     }
     
     func editPokemon(index: Int, pokemon: SavedPokemon, context : NSManagedObjectContext) {
