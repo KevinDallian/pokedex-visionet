@@ -1,0 +1,16 @@
+PODS:
+  - CodeScanner_Rownd (2.2.1)
+
+DEPENDENCIES:
+  - CodeScanner_Rownd
+
+SPEC REPOS:
+  trunk:
+    - CodeScanner_Rownd
+
+SPEC CHECKSUMS:
+  CodeScanner_Rownd: 43ea1ea198c17653c32c31e797e274c0d7a695ae
+
+PODFILE CHECKSUM: cebb4e3e279233e088576aae2a1def8723a565f3
+
+COCOAPODS: 1.12.1

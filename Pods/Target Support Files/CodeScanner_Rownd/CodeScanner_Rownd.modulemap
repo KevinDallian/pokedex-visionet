@@ -1,0 +1,6 @@
+framework module CodeScanner_Rownd {
+  umbrella header "CodeScanner_Rownd-umbrella.h"
+
+  export *
+  module * { export * }
+}

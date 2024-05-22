@@ -30,6 +30,11 @@ struct PokemonListView: View {
                         MyPokemonView(vm: MyPokemonViewModel(moc: moc))
                     }
                 }
+                ToolbarItem(placement: .navigation) {
+                    NavigationLink("Scan"){
+                        ScannerView()
+                    }
+                }
             }
         }
     }
