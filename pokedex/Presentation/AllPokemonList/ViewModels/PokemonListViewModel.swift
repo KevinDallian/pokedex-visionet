@@ -11,7 +11,7 @@ import Foundation
 class PokemonListViewModel : ObservableObject {
     @Published var pokemonList: [Pokemon] = []
     private var cancellable: AnyCancellable?
-    let pokemonEndPoint = "https://pokeapi.co/api/v2/pokemon?limit=30&offset=0"
+    let pokemonEndPoint = "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0"
 
     func fetchPokemonList() {
         guard let url = URL(string: pokemonEndPoint) else { return }
