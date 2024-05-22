@@ -21,16 +21,11 @@ class PokemonDetailViewModel : ObservableObject {
         self.moc = moc
     }
     
-    func catchPokemon() async {
-        do {
-            let success = try await ExpressAPIManager.shared.catchPokemon()
-            DispatchQueue.main.async{
-                self.isCaught = success
-                self.showAlert.toggle()
-            }
-        } catch let error {
-            print("Error Catching pokemon : \(error)")
-        }
+    func catchPokemon() {
+        let randomNumber = Int.random(in: 0...10)
+        let success = randomNumber > 5
+        self.isCaught = success
+        self.showAlert.toggle()
     }
     
     func savePokemon() async {

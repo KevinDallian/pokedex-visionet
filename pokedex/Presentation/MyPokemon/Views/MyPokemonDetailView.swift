@@ -51,9 +51,7 @@ struct MyPokemonDetailView: View {
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button {
-                    Task{
-                        await vm.releasePokemon()
-                    }
+                    vm.releasePokemon()
                 } label: {
                     Text("Release")
                         .foregroundStyle(.red)

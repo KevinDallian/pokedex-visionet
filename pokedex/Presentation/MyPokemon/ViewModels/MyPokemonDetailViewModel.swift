@@ -26,33 +26,22 @@ class MyPokemonDetailViewModel : ObservableObject {
     }
     
     func renamePokemon() async {
-        do {
-            let data = try await ExpressAPIManager.shared.renamePokemon(name: newNickname, renameCount: pokemon.renameCount)
-            let newPokemon = SavedPokemon(id: data.0 ,nickname: newNickname, renameCount: data.1, pokemon: pokemon.pokemon)
-            let index = CoreDataManager.shared.pokemons.firstIndex { savedPokemon in
-                savedPokemon.nameId! == pokemon.id
-            }
-            let viewModelIndex = pvm.pokemonList.firstIndex(of: pokemon)
-            CoreDataManager.shared.editPokemon(index: index!, pokemon: newPokemon, context: moc)
-            DispatchQueue.main.async{
-                self.pokemon = newPokemon
-                self.pvm.pokemonList[viewModelIndex!] = newPokemon
-            }
-        } catch let error {
-            print("Error renaming Pokemon : \(error)")
+        let generatedId = fibonacci(of: pokemon.renameCount)
+        let newPokemon = SavedPokemon(id: "\(newNickname)-\(generatedId)" ,nickname: newNickname, renameCount: pokemon.renameCount + 1, pokemon: pokemon.pokemon)
+        let index = CoreDataManager.shared.pokemons.firstIndex { savedPokemon in
+            savedPokemon.nameId! == pokemon.id
+        }
+        let viewModelIndex = pvm.pokemonList.firstIndex(of: pokemon)
+        CoreDataManager.shared.editPokemon(index: index!, pokemon: newPokemon, context: moc)
+        DispatchQueue.main.async{
+            self.pokemon = newPokemon
+            self.pvm.pokemonList[viewModelIndex!] = newPokemon
         }
     }
     
-    func releasePokemon() async {
-        do{
-            let isPrime = try await ExpressAPIManager.shared.releasePokemon()
-            DispatchQueue.main.async{
-                self.isReleased = isPrime
-                self.showRelease.toggle()
-            }
-        } catch let error {
-            print("Error releasing pokemon : \(error)")
-        }
+    func releasePokemon() {
+        self.isReleased.toggle()
+        self.showRelease.toggle()
     }
     
     func deletePokemon() {

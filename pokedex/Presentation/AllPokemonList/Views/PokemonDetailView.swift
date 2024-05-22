@@ -36,9 +36,7 @@ struct PokemonDetailView: View {
         }.toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button {
-                    Task{
-                        await vm.catchPokemon()
-                    }
+                    vm.catchPokemon()
                 } label: {
                     Text("Catch \(capitalFirstLetter(text: vm.pokemon.name))")
                 }
