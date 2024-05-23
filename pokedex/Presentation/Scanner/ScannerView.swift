@@ -9,28 +9,35 @@ import CodeScanner_Rownd
 import SwiftUI
 
 struct ScannerView: View {
-    @State var showSheet = false
-    @State var scannedText = ""
+    @StateObject var vm = ScannerViewModel()
+    @Environment(\.managedObjectContext) var moc
     var body: some View {
         VStack{
-            Text(scannedText)
+            Text(vm.scannedText)
             Button {
-                showSheet.toggle()
+                vm.showSheet.toggle()
             } label: {
-                Text("Start Scanning")
+                Text("Start Scan")
+            }
+            if let pokemon = vm.pokemon {
+                PokemonDetailView(vm: PokemonDetailViewModel(pokemon: pokemon, moc: moc))
             }
         }
-        .sheet(isPresented: $showSheet, content: {
-            CodeScannerView(codeTypes: [.qr]) { result in
-                switch result {
-                case .success(let text):
-                    scannedText = text.string
-                    showSheet.toggle()
-                case .failure(let error):
-                    print("Error loading Code Scanner View : \(error.localizedDescription)")
+        .sheet(isPresented: $vm.showSheet, content: {
+            CodeScannerView(codeTypes: [.qr]){ res in
+                Task{
+                    await vm.scanCompletion(result: res)
                 }
             }
         })
+        .alert(isPresented: $vm.showError, error: vm.error) {
+            Button {
+                
+            } label: {
+                Text("Dismiss")
+            }
+
+        }
     }
 }
 

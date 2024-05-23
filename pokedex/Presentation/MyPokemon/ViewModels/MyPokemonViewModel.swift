@@ -46,7 +46,7 @@ class MyPokemonViewModel : ObservableObject {
                 self.pokemonList.append(savedPokemon)
             }
         } catch {
-            print("Error fetching pokemon detail: \(error)")
+            print("Error fetching pokemon detail: \(error.localizedDescription)")
         }
     }
 }
