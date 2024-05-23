@@ -47,13 +47,14 @@ class ScannerViewModel : ObservableObject {
             }
             
             let pokemon = try JSONDecoder().decode(Pokemon.self, from: data)
-            print(pokemon)
             DispatchQueue.main.async{
                 self.pokemon = pokemon
             }
         } catch {
             self.error = .urlNotFound
-            showError.toggle()
+            DispatchQueue.main.async {
+                self.showError.toggle()
+            }
         }
         
     }
