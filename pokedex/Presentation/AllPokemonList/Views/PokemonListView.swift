@@ -22,6 +22,7 @@ struct PokemonListView: View {
             })
             .onAppear(perform: {
                 vm.fetchPokemonList()
+                
             })
             .navigationTitle("Pokemon List")
             .toolbar {
