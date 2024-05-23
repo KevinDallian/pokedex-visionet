@@ -5,6 +5,7 @@
 //  Created by Kevin Dallian on 23/05/24.
 //
 
+import SwiftUI
 import CodeScanner_Rownd
 import Foundation
 
@@ -56,6 +57,5 @@ class ScannerViewModel : ObservableObject {
                 self.showError.toggle()
             }
         }
-        
     }
 }

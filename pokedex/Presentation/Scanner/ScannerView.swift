@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ScannerView: View {
     @StateObject var vm = ScannerViewModel()
+    @StateObject var nfcReader = NFCReader()
     @Environment(\.managedObjectContext) var moc
     var body: some View {
         VStack{
@@ -17,11 +18,17 @@ struct ScannerView: View {
             Button {
                 vm.showSheet.toggle()
             } label: {
-                Text("Start Scan")
+                Text("Scan QR")
             }
             if let pokemon = vm.pokemon {
                 PokemonDetailView(vm: PokemonDetailViewModel(pokemon: pokemon, moc: moc))
             }
+            Button {
+                nfcReader.beginScanNFC()
+            } label: {
+                Text("Scan NFC")
+            }
+
         }
         .sheet(isPresented: $vm.showSheet, content: {
             CodeScannerView(codeTypes: [.qr]){ res in

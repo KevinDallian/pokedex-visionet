@@ -28,6 +28,7 @@
 		D8E14F812BFEFB0300CC1A34 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E14F802BFEFB0300CC1A34 /* NotificationViewModel.swift */; };
 		D8E14F832BFF02E900CC1A34 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E14F822BFF02E900CC1A34 /* ScannerViewModel.swift */; };
 		D8E14F862BFF07D000CC1A34 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E14F852BFF07D000CC1A34 /* Errors.swift */; };
+		D8E14F8A2BFF821800CC1A34 /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E14F892BFF821800CC1A34 /* NFCReader.swift */; };
 		D8ECE3312BFC9A01000776CE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ECE3302BFC9A01000776CE /* CoreDataManager.swift */; };
 		D8ECE3342BFC9A93000776CE /* SavedPokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ECE3332BFC9A93000776CE /* SavedPokemon.swift */; };
 		D8ECE3362BFC9B6C000776CE /* MyPokemonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ECE3352BFC9B6C000776CE /* MyPokemonView.swift */; };
@@ -62,6 +63,8 @@
 		D8E14F802BFEFB0300CC1A34 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		D8E14F822BFF02E900CC1A34 /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
 		D8E14F852BFF07D000CC1A34 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		D8E14F872BFF801D00CC1A34 /* pokedex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pokedex.entitlements; sourceTree = "<group>"; };
+		D8E14F892BFF821800CC1A34 /* NFCReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCReader.swift; sourceTree = "<group>"; };
 		D8ECE3302BFC9A01000776CE /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		D8ECE3332BFC9A93000776CE /* SavedPokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPokemon.swift; sourceTree = "<group>"; };
 		D8ECE3352BFC9B6C000776CE /* MyPokemonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPokemonView.swift; sourceTree = "<group>"; };
@@ -95,8 +98,9 @@
 		D86A80272BFE357F00DF1110 /* Scanner */ = {
 			isa = PBXGroup;
 			children = (
+				D8E14F8B2BFF843600CC1A34 /* Views */,
+				D8E14F882BFF820000CC1A34 /* ViewModels */,
 				D86A80282BFE358900DF1110 /* ScannerView.swift */,
-				D8E14F822BFF02E900CC1A34 /* ScannerViewModel.swift */,
 			);
 			path = Scanner;
 			sourceTree = "<group>";
@@ -122,6 +126,7 @@
 		D8966B5D2BFC51A800CEF76A /* pokedex */ = {
 			isa = PBXGroup;
 			children = (
+				D8E14F872BFF801D00CC1A34 /* pokedex.entitlements */,
 				D8966B712BFC538F00CEF76A /* Core */,
 				D8966B6F2BFC532F00CEF76A /* Presentation */,
 				D8966B5E2BFC51A800CEF76A /* pokedexApp.swift */,
@@ -210,6 +215,22 @@
 				D8E14F852BFF07D000CC1A34 /* Errors.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		D8E14F882BFF820000CC1A34 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				D8E14F822BFF02E900CC1A34 /* ScannerViewModel.swift */,
+				D8E14F892BFF821800CC1A34 /* NFCReader.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		D8E14F8B2BFF843600CC1A34 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		D8ECE3322BFC9A85000776CE /* Pokemon */ = {
@@ -420,6 +441,7 @@
 				D8E14F832BFF02E900CC1A34 /* ScannerViewModel.swift in Sources */,
 				D8966B832BFC77D800CEF76A /* PokemonMove.swift in Sources */,
 				D8ECE33F2BFCA270000776CE /* MyPokemonDetailView.swift in Sources */,
+				D8E14F8A2BFF821800CC1A34 /* NFCReader.swift in Sources */,
 				D86A80292BFE358900DF1110 /* ScannerView.swift in Sources */,
 				D8ECE3452BFCA7CE000776CE /* MyPokemonDetailViewModel.swift in Sources */,
 				D8E14F812BFEFB0300CC1A34 /* NotificationViewModel.swift in Sources */,
@@ -566,12 +588,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = pokedex/pokedex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pokedex/Preview Content\"";
 				DEVELOPMENT_TEAM = MH2BSYHQQX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NFCReaderUsageDescription = "We need your permission to scan NFC Tags";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is needed to scan QR Codes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -598,12 +622,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = pokedex/pokedex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pokedex/Preview Content\"";
 				DEVELOPMENT_TEAM = MH2BSYHQQX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NFCReaderUsageDescription = "We need your permission to scan NFC Tags";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is needed to scan QR Codes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
